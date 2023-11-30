@@ -1,12 +1,10 @@
-package student.examples.ggengine.entity;
+package student.examples.ggengine.game;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
 
-@Data
+@Getter
 @AllArgsConstructor
-@NoArgsConstructor
 public abstract class Item {
 	protected int width;
 	protected int height;
@@ -16,5 +14,6 @@ public abstract class Item {
 	protected int left;
 	protected int rotation;
 	protected int rotationSpeed;
+	//TODO: protect the type
 	protected ItemType itemType;
 }
