@@ -1,0 +1,17 @@
+.rock {
+  width: 100px;
+  height: 100px;
+
+  position: absolute;
+  /* top: 50%;
+  left: 70%; */
+
+  transform: rotate(45deg);
+
+  border: 1px solid red;
+
+  background-image: url(/assets/rock.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}

@@ -1,0 +1,8 @@
+<div *ngFor="let item of items">
+  <div [ngSwitch]="item.itemType">
+    <rock *ngSwitchCase="'ROCK'" [top]="item.top" [left]="item.left"></rock>
+    <ship *ngSwitchCase="'SHIP'" [top]="item.top" [left]="item.left"></ship>
+  </div>
+</div>
+
+<router-outlet></router-outlet>
