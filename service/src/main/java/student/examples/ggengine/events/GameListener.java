@@ -9,15 +9,14 @@ import student.examples.ggengine.services.GameService;
 
 @Slf4j
 @Component
-public class GameEventListener implements ApplicationListener<GameStatusChangeEvent> {
+public class GameListener implements ApplicationListener<GameEvent> {
 	@Autowired
 	private GameService gameService;
 
 	@Override
-	public void onApplicationEvent(GameStatusChangeEvent event) {
+	public void onApplicationEvent(GameEvent event) {
 		log.info("Received custom event: " + event.getGameId());
 		log.info("Received custom event: " + event.getNewStatus());
-		gameService.addGame();
+//		gameService.addGame();
 	}
-
 }

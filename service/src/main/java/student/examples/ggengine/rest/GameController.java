@@ -1,5 +1,8 @@
 package student.examples.ggengine.rest;
 
+import java.util.UUID;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -8,8 +11,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import student.examples.ggengine.events.GameEventPublisher;
+import student.examples.ggengine.events.GamePublisher;
 import student.examples.ggengine.game.GameState;
+import student.examples.ggengine.services.GameService;
 
 @Slf4j
 @CrossOrigin(origins = "http://localhost:4200")
@@ -17,13 +21,12 @@ import student.examples.ggengine.game.GameState;
 @RequiredArgsConstructor
 @RequestMapping("/game")
 public class GameController {
-	private final GameEventPublisher gameEventPublisher;
+	@Autowired
+	GameService gameService;
 
 	@GetMapping("/join/{id}")
 	public Long joinGame(@PathVariable Long id) {
-		// take an id of the player
-		// signal the start of the new game
-		gameEventPublisher.publishGameStatusChange(id, GameState.STARTED);
+		gameService.joinGame(id);
 		log.info("id: " + id);
 		return id;
 	}

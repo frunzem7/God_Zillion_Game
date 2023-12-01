@@ -11,7 +11,7 @@ public final class Frame {
 	private int id;
 	private final Set<Item> items;
 
-	public Frame(int id, Set<Item>items) {
+	public Frame(int id, Set<Item> items) {
 		this.id = id;
 		this.items = new HashSet<>(items);
 	}

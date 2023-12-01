@@ -14,6 +14,6 @@ public abstract class Item {
 	protected int left;
 	protected int rotation;
 	protected int rotationSpeed;
-	//TODO: protect the type
+	// TODO: protect the type
 	protected ItemType itemType;
 }
