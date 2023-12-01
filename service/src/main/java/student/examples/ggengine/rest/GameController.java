@@ -1,7 +1,5 @@
 package student.examples.ggengine.rest;
 
-import java.util.UUID;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,8 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import student.examples.ggengine.events.GamePublisher;
-import student.examples.ggengine.game.GameState;
 import student.examples.ggengine.services.GameService;
 
 @Slf4j
@@ -26,7 +22,7 @@ public class GameController {
 
 	@GetMapping("/join/{id}")
 	public Long joinGame(@PathVariable Long id) {
-		gameService.joinGame(id);
+		gameService.joinGame();
 		log.info("id: " + id);
 		return id;
 	}

@@ -1,23 +1,35 @@
 package student.examples.ggengine.game;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
-public class MultiPlayerTeamGame extends Game {
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
-	@Override
-	public UUID getId() {
-		return super.getId();
+@Getter
+@Setter
+@ToString
+public class MultiPlayerTeamGame extends Game implements HasTeams, HasPlayers {
+
+	private UUID id;
+	private Set<Item> items;
+	private Map<String, Team> teams;
+	private Set<Participant> participants;
+
+	public MultiPlayerTeamGame() {
+		this.teams = new HashMap<>();
 	}
 
 	@Override
-	public Set<Item> getItems() {
-		return super.getItems();
+	public Set<Participant> getPlayers() {
+		return participants;
 	}
 
 	@Override
-	public GameState getGameState() {
-		return super.getGameState();
+	public Map<String, Team> getTeams() {
+		return teams;
 	}
-
 }
