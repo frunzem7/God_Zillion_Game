@@ -13,35 +13,35 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
-import student.examples.ggengine.services.GameService;
+import student.examples.ggengine.services.AuthService;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/game")
-public class GameController {
+@RequestMapping("/auth")
+public class AuthController {
 	@Autowired
-	GameService gameService;
+	AuthService authService;
 
-	@PostMapping("/join/{playerId}")
-	public ResponseEntity<String> joinGame(@PathVariable UUID playerId) {
+	@PostMapping("/signin/{userName}/{userPassword}")
+	public ResponseEntity<String> signIn(@PathVariable String userName, @PathVariable String userPassword) {
 		try {
-			gameService.joinGame(playerId);
-			return ResponseEntity.ok("{\"status\": \"success\", \"message\": \"Join in game successfully.\"}");
+			authService.signIn(userName, userPassword);
+			return ResponseEntity.ok("{\"status\": \"success\", \"message\": \"Signed in successfully.\"}");
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-					.body("{\"status\": \"failed\", \"message\": \"An error occurred during game join.\"}");
+					.body("{\"status\": \"failed\", \"message\": \"An error occurred during sign-in.\"}");
 		}
 	}
 
-	@GetMapping("/leave/{playerId}")
-	public ResponseEntity<String> leaveGame(@PathVariable UUID playerId) {
+	@GetMapping("/signout/{playerId}")
+	public ResponseEntity<String> signOut(@PathVariable UUID playerId) {
 		try {
-			gameService.leaveGame(playerId);
-			return ResponseEntity.ok("{\"status\": \"success\", \"message\": \"Leave game successfully.\"}");
+			authService.signOut(playerId);
+			return ResponseEntity.ok("{\"status\": \"success\", \"message\": \"Signed out successfully.\"}");
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-					.body("{\"status\": \"failed\", \"message\": \"An error occurred during leave game.\"}");
+					.body("{\"status\": \"failed\", \"message\": \"An error occurred during sign-out.\"}");
 		}
 	}
 }
