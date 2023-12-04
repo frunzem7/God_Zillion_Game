@@ -14,20 +14,23 @@ import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
 import student.examples.ggengine.services.AuthService;
+import student.examples.ggengine.services.GameService;
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/auth")
 public class AuthController {
 	@Autowired
 	AuthService authService;
+	@Autowired
+	GameService gameService;
 
 	@PostMapping("/signin/{userName}/{userPassword}")
 	public ResponseEntity<String> signIn(@PathVariable String userName, @PathVariable String userPassword) {
 		try {
 			System.out.println("Received Sign In Request for User: " + userName);
-			String token = authService.signIn(userName, userPassword);
+			String token = authService.signinUserAccount(userName, userPassword);
 			return ResponseEntity.ok("{\"status\": \"success\", \"token\": \"" + token + "\"}");
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -38,7 +41,7 @@ public class AuthController {
 	@GetMapping("/signout/{playerId}")
 	public ResponseEntity<String> signOut(@PathVariable UUID playerId) {
 		try {
-			authService.signOut(playerId);
+			gameService.leaveGame(playerId);
 			return ResponseEntity.ok("{\"status\": \"success\", \"message\": \"Signed out successfully.\"}");
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)

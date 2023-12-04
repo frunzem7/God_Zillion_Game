@@ -12,7 +12,6 @@ import student.examples.ggengine.domain.entity.User;
 public interface UserRepository extends JpaRepository<User, UUID> {
 	Optional<User> findByUserName(@Param("userName") String userName);
 
-	@Query("SELECT u FROM User u WHERE u.userName = :userName AND u.password = :hashedPassword")
-	Optional<User> findByUserNameAndHashedPassword(@Param("userName") String userName,
-			@Param("hashedPassword") String hashedPassword);
+	@Query(value = "select * from user_profile where user_name = ?1 and password = ?2", nativeQuery = true)
+	Optional<User> findByUserNameAndPassword(String userName, String password);
 }
