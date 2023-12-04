@@ -11,7 +11,6 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 public class Team implements ParticipantCollection {
-
 	private Set<Participant> participants = new HashSet<Participant>();
 
 	@Override

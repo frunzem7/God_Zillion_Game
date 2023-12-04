@@ -13,7 +13,6 @@ import lombok.ToString;
 @Setter
 @ToString
 public class MultiPlayerTeamGame extends Game implements HasTeams, HasPlayers {
-
 	private UUID id;
 	private Set<Item> items;
 	private Map<String, Team> teams;

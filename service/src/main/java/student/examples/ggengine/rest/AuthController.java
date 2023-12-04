@@ -26,8 +26,9 @@ public class AuthController {
 	@PostMapping("/signin/{userName}/{userPassword}")
 	public ResponseEntity<String> signIn(@PathVariable String userName, @PathVariable String userPassword) {
 		try {
-			authService.signIn(userName, userPassword);
-			return ResponseEntity.ok("{\"status\": \"success\", \"message\": \"Signed in successfully.\"}");
+			System.out.println("Received Sign In Request for User: " + userName);
+			String token = authService.signIn(userName, userPassword);
+			return ResponseEntity.ok("{\"status\": \"success\", \"token\": \"" + token + "\"}");
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
 					.body("{\"status\": \"failed\", \"message\": \"An error occurred during sign-in.\"}");
