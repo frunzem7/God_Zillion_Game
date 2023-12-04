@@ -22,9 +22,14 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private UUID id;
+
+	@NotNull
+	@Pattern(regexp = "[0-9a-z]+")
 	private String userName;
+
 	@NotNull
 	private String password;
+
 	@NotNull
 	@Pattern(regexp = "^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$")
 	private String email;

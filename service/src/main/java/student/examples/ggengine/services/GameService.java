@@ -18,7 +18,6 @@ import student.examples.ggengine.factory.MultiplayerTeamGameFactory;
 import student.examples.ggengine.factory.PlayerFactory;
 import student.examples.ggengine.game.MultiPlayerTeamGame;
 import student.examples.ggengine.game.Participant;
-import student.examples.ggengine.game.Player;
 import student.examples.ggengine.game.Team;
 
 @Slf4j
@@ -47,6 +46,7 @@ public class GameService {
 
 	public void addParticipant(Participant participant) {
 		allParticipants.add(participant);
+		System.out.println("This is participants size: " + allParticipants.size());
 	}
 
 	public void removeParticipant(UUID playerId) {

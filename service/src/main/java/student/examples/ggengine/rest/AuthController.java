@@ -9,10 +9,13 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import student.examples.ggengine.domain.entity.User;
 import student.examples.ggengine.services.AuthService;
 import student.examples.ggengine.services.GameService;
 
@@ -26,11 +29,16 @@ public class AuthController {
 	@Autowired
 	GameService gameService;
 
-	@PostMapping("/signin/{userName}/{userPassword}")
-	public ResponseEntity<String> signIn(@PathVariable String userName, @PathVariable String userPassword) {
+	@PostMapping("/signup")
+	public ResponseEntity<User> signup(@Valid @RequestBody User user) {
+		return new ResponseEntity<>(authService.registerNewUserAccount(user), HttpStatus.OK);
+	}
+
+	@PostMapping("/signin")
+	public ResponseEntity<String> signIn(@RequestBody User user) {
 		try {
-			System.out.println("Received Sign In Request for User: " + userName);
-			String token = authService.signinUserAccount(userName, userPassword);
+
+			String token = authService.signinUserAccount(user);
 			return ResponseEntity.ok("{\"status\": \"success\", \"token\": \"" + token + "\"}");
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
